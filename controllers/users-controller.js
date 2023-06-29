@@ -12,6 +12,34 @@ const getUsers = (req, res) => {
     .catch(err => res.status(500).send({ message: err.message }));
 }
 
+// Получить данные о пользователе по userId
+const getUser = (req, res)=> {
+  User
+    .findById(req.params.userId)
+    .then((movie) => {
+      res
+        .status(200)
+        .json(movie);
+    })
+    .catch(err => res.status(500).send({ message: err.message }));
+
+}
+
+// Создаёт пользователя
+const addUser = (req, res) => {
+  const user = new User(req.body)
+  user
+    .save()
+    .then((result) => {
+      res
+        .status(201)
+        .json(result);
+    })
+    .catch(err => res.status(500).send({ message: err.message }));
+}
+
 module.exports = {
-  getUsers
+  getUsers,
+  getUser,
+  addUser
 }
