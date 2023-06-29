@@ -8,7 +8,6 @@ router.get('/users', getUsers)
 // Получить данные о пользователе по id
 router.get('/users/:userId', getUser)
 
-
 // Добавление данных
 router.post('/users', addUser)
 

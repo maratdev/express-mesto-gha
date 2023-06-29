@@ -1,27 +1,30 @@
 const User = require('../models/user');
 
+
+const handleError = (res, err) => {
+  res.status(500).send({ message: err.message })
+}
+
+const handleResult = (res, data) => {
+  res.status(200).json(data)
+}
+
+
+
 // Получить данные о всех пользователях
 const getUsers = (req, res) => {
   User
     .find()
-    .then((users) => {
-      res
-        .status(200)
-        .json(users)
-    })
-    .catch(err => res.status(500).send({ message: err.message }));
+    .then((users) => handleResult(res, users))
+    .catch((err) => handleError(res, err));
 }
 
 // Получить данные о пользователе по userId
 const getUser = (req, res)=> {
   User
     .findById(req.params.userId)
-    .then((movie) => {
-      res
-        .status(200)
-        .json(movie);
-    })
-    .catch(err => res.status(500).send({ message: err.message }));
+    .then((user) => handleResult(res, user))
+    .catch((err) => handleError(res, err));
 
 }
 
@@ -35,7 +38,7 @@ const addUser = (req, res) => {
         .status(201)
         .json(result);
     })
-    .catch(err => res.status(500).send({ message: err.message }));
+    .catch((err) => handleError(res, err));
 }
 
 module.exports = {
