@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 const {
-  getUsers, getUser, addUser, updateUser,
+  getUsers, getUser, addUser, updateUser, updateUserAvatar,
 } = require('../controllers/users-controller');
 
 // Получить данные о всех пользователях
@@ -15,5 +15,8 @@ router.post('/users', addUser);
 
 // Обновление данных
 router.patch('/users/me', updateUser);
+
+// Обновление данных avatar
+router.patch('/users/me/avatar', updateUserAvatar);
 
 module.exports = router;

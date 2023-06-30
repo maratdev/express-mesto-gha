@@ -36,7 +36,18 @@ const addUser = (req, res) => {
 
 // Обновление данных
 const updateUser = (req, res) => {
-  console.log(req.body);
+  User
+    .findByIdAndUpdate(req.user._id, req.body)
+    .then((result) => {
+      res
+        .status(200)
+        .json(result);
+    })
+    .catch((err) => handleError(res, err));
+};
+
+// Обновление данных
+const updateUserAvatar = (req, res) => {
   User
     .findByIdAndUpdate(req.user._id, req.body)
     .then((result) => {
@@ -52,4 +63,5 @@ module.exports = {
   getUser,
   addUser,
   updateUser,
+  updateUserAvatar,
 };
