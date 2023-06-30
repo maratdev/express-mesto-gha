@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const usersRoutes = require('./routes/users-routes');
 const cardsRoutes = require('./routes/card-routes');
 
-const PORT = 3000;
+const { PORT = 3000 } = process.env;
 const URL = 'mongodb://localhost:27017/mestodb';
 const app = express();
 
@@ -18,6 +18,11 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(usersRoutes);
 app.use(cardsRoutes);
+
+app.use('/*', (req, res, next) => {
+  res.status(404).send({ message: 'Страница не найдена.' });
+  next();
+});
 
 mongoose
   .connect(URL, { useNewUrlParser: true, useUnifiedTopology: true })

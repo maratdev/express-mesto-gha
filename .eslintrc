@@ -5,6 +5,7 @@
     "no-console": "off",
     "no-underscore-dangle":  ["error", { "allow": ["_id"] }],
     "quotes": ["warn", "single"],
-    "prefer-const": "warn"
+    "prefer-const": "warn",
+    "consistent-return": "off"
   }
 }
