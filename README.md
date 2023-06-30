@@ -54,5 +54,5 @@
 Репозиторий:
 
 ```bash
-git clone https://maratdev.github.io/express-mesto-gha/
+git clone https://github.com/maratdev/express-mesto-gha/
 ```

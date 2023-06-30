@@ -45,7 +45,7 @@ const addUser = (req, res) => {
   newUser
     .save()
     .then((result) => {
-      res.status(SUCCESS).json(result);
+      res.status(OK).json(result);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -63,7 +63,7 @@ const updateUser = (req, res) => {
       if (!result) {
         return res.status(404).send({ message: 'Пользователь по указанному _id не найден.' });
       }
-      res.status(SUCCESS).json(result);
+      res.status(OK).json(result);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -81,7 +81,7 @@ const updateUserAvatar = (req, res) => {
       if (!result) {
         return res.status(404).send({ message: 'Пользователь по указанному _id не найден.' });
       }
-      res.status(SUCCESS).json(result);
+      res.status(OK).json(result);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
