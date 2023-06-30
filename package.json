@@ -4,9 +4,10 @@
   "description": "Проект Mesto фронтенд + бэкенд",
   "main": "app.js",
   "scripts": {
-    "start": "npm run start",
+    "start": "node app.js",
     "dev": "nodemon app.js",
-    "lint": "npx eslint"
+    "lint": "npx eslint",
+    "lint:fix": "npx eslint --fix ."
   },
   "repository": {
     "type": "git",

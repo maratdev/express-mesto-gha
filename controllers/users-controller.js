@@ -17,7 +17,8 @@ const getUsers = (req, res) => {
 
 // Получить данные о пользователе по userId
 const getUser = (req, res) => {
-  User.findById(req.params.userId)
+  User
+    .findById(req.params.userId)
     .then((user) => handleResult(res, user))
     .catch((err) => handleError(res, err));
 };
@@ -33,8 +34,22 @@ const addUser = (req, res) => {
     .catch((err) => handleError(res, err));
 };
 
+// Обновление данных
+const updateUser = (req, res) => {
+  console.log(req.body);
+  User
+    .findByIdAndUpdate(req.user._id, req.body)
+    .then((result) => {
+      res
+        .status(200)
+        .json(result);
+    })
+    .catch((err) => handleError(res, err));
+};
+
 module.exports = {
   getUsers,
   getUser,
   addUser,
+  updateUser,
 };

@@ -10,7 +10,8 @@ const handleResult = (res, data) => {
 
 // Получить данные о всех карточках
 const getCards = (req, res) => {
-  Card.find()
+  Card
+    .find()
     .then((cards) => handleResult(res, cards))
     .catch((err) => handleError(res, err));
 };
@@ -45,4 +46,5 @@ module.exports = {
   getCards,
   createCard,
   getDeleteCard,
+
 };
