@@ -34,7 +34,7 @@ const addUser = (req, res) => {
     .catch((err) => handleError(res, err));
 };
 
-// Обновление данных
+// Обновление данных user
 const updateUser = (req, res) => {
   User
     .findByIdAndUpdate(req.user._id, req.body)
@@ -46,7 +46,7 @@ const updateUser = (req, res) => {
     .catch((err) => handleError(res, err));
 };
 
-// Обновление данных
+// Обновление данных user -> avatar
 const updateUserAvatar = (req, res) => {
   User
     .findByIdAndUpdate(req.user._id, req.body)
