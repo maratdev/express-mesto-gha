@@ -29,7 +29,20 @@ const createCard = (req, res) => {
     .catch((err) => handleError(res, err));
 };
 
+// Удаление карточки
+const getDeleteCard = (req, res) => {
+  Card
+    .findByIdAndDelete(req.params.cardId)
+    .then((result) => {
+      res
+        .status(200)
+        .json(result);
+    })
+    .catch((err) => handleError(res, err));
+};
+
 module.exports = {
   getCards,
   createCard,
+  getDeleteCard,
 };
