@@ -1,8 +1,11 @@
 const router = require('express').Router();
 
-const { getCards } = require('../controllers/card-controller');
+const { getCards, createCard } = require('../controllers/card-controller');
 
 // Получить данные о всех карточках
-router.get('/cards', getCards)
+router.get('/cards', getCards);
+
+// Добавление данных
+router.post('/cards', createCard);
 
 module.exports = router;
