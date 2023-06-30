@@ -7,7 +7,7 @@
 
 # Logs
 logs
-
+*.log
 
 # testing
 /coverage
