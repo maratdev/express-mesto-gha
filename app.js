@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const usersRoutes = require('./routes/users-routes');
 const cardsRoutes = require('./routes/card-routes');
+const { NOT_FOUND } = require('./constants');
 
 const { PORT = 3000 } = process.env;
 const URL = 'mongodb://localhost:27017/mestodb';
@@ -20,7 +21,7 @@ app.use(usersRoutes);
 app.use(cardsRoutes);
 
 app.use('/*', (req, res, next) => {
-  res.status(404).send({ message: 'Страница не найдена.' });
+  res.status(NOT_FOUND).send({ message: 'Страница не найдена.' });
   next();
 });
 
