@@ -1,6 +1,6 @@
 const User = require('../models/user');
 const {
-  BAD_REQUEST, NOT_FOUND, SERVER_ERROR, OK,
+  BAD_REQUEST, NOT_FOUND, SERVER_ERROR, OK, CREATED,
 } = require('../constants');
 
 const handleError = (res, err) => {
@@ -42,7 +42,7 @@ const addUser = (req, res) => {
   newUser
     .save()
     .then((result) => {
-      res.status(OK).json(result);
+      res.status(CREATED).json(result);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
