@@ -59,7 +59,7 @@ const updateUser = (req, res) => {
     .findByIdAndUpdate(req.user._id, { name, about }, { new: true, runValidators: true })
     .then((result) => {
       if (!result) {
-        return res.status(BAD_REQUEST).send({ message: 'Пользователь по указанному _id не найден.' });
+        return res.status(NOT_FOUND).send({ message: 'Пользователь по указанному _id не найден.' });
       }
       res.status(OK).json(result);
     })
@@ -78,7 +78,7 @@ const updateUserAvatar = (req, res) => {
     .findByIdAndUpdate(req.user._id, { avatar }, { new: true, runValidators: true })
     .then((result) => {
       if (!result) {
-        return res.status(BAD_REQUEST).send({ message: 'Пользователь по указанному _id не найден.' });
+        return res.status(NOT_FOUND).send({ message: 'Пользователь по указанному _id не найден.' });
       }
       res.status(OK).json(result);
     })
