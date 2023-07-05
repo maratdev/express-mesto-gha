@@ -5,7 +5,7 @@ const cardsRoutes = require('./routes/card-routes');
 const { NOT_FOUND } = require('./constants');
 
 const { PORT = 3000 } = process.env;
-const URL = 'mongodb://localhost:27017/mestodb';
+const DB = 'mongodb://localhost:27017/mestodb';
 const app = express();
 
 app.use((req, res, next) => {
@@ -26,7 +26,7 @@ app.use('/*', (req, res, next) => {
 });
 
 mongoose
-  .connect(URL, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(DB, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connected to MongoDB '))
   .catch((err) => console.log(`DB connection error: ${err}`));
 
