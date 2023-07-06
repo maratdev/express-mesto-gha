@@ -1,13 +1,15 @@
 [![Tests](../../actions/workflows/tests-13-sprint.yml/badge.svg)](../../actions/workflows/tests-13-sprint.yml) [![Tests](../../actions/workflows/tests-14-sprint.yml/badge.svg)](../../actions/workflows/tests-14-sprint.yml)
 
 # Проект Mesto бэкенд
-
+ _***Проектная работа №14. Курс «Веб-разработчик» от Яндекс Практикум.***_
 
 ## Технологии:
 ![Express](https://img.shields.io/badge/-Express-090909?style=for-the-badge&logo=Express)
 ![Node.js](https://img.shields.io/badge/-Node.js-090909?style=for-the-badge&logo=Node.js)
 ![MongoDB](https://img.shields.io/badge/-MongoDB-090909?style=for-the-badge&logo=MongoDB)
 ![Postman](https://img.shields.io/badge/-Postman-090909?style=for-the-badge&logo=Postman)
+![Eslint](https://img.shields.io/badge/-Eslint-090909?style=for-the-badge&logo=Eslint&logoColor=blue)
+![Json-web-tokens](https://img.shields.io/badge/-Jsonwebtokens-090909?style=for-the-badge&logo=json-web-tokens&logoColor=pink)
 
 ### Функционал:
 
@@ -25,6 +27,7 @@
 + Снятие лайка
 + Центральная обработка ошибок
 + Валидация входящих данных
++ Защитита API авторизации
 ------
 ### О чём проект?
 
