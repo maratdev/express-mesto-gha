@@ -24,19 +24,12 @@ const createUser = (req, res) => {
 
 // Авторизация
 const login = (req, res) => {
-  const { email } = req.body;
-  User
-    .findOne({ email })
+  const { email, password } = req.body;
+  return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, 'EQAtwCyHX5iNV3xfRfoy', { expiresIn: '7d' });
-      res.status(OK).send({ token });
-    })
-    .then((matched) => {
-      if (!matched) {
-        return Promise.reject(new Error('Неправильные почта или пароль 2'));
-      }
-      // аутентификация успешна
-      res.send({ message: 'Всё верно!' });
+      console.log(user._id.toString());
+      const token = jwt.sign({ _id: user._id.toString() }, 'prpZUoYKk3YJ3nhemFHZ', { expiresIn: '7d' });
+      res.send({ token });
     })
     .catch((err) => {
       handleError(res, err);

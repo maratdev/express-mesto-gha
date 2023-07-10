@@ -1,11 +1,14 @@
 const router = require('express').Router();
 
 const {
-  getUsers, getUser, createUser, updateUser, updateUserAvatar,
+  getUsers, getUser, updateUser, updateUserAvatar, getCurrentUser,
 } = require('../controllers/users-controller');
 
 // Получить данные о всех пользователях
 router.get('/users', getUsers);
+
+// Получения информации о пользователе
+router.get('/users/me', getCurrentUser);
 
 // Получить данные о пользователе по id
 router.get('/users/:userId', getUser);

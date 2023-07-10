@@ -1,12 +1,8 @@
 const User = require('../models/user');
 
 const {
-  BAD_REQUEST, NOT_FOUND, SERVER_ERROR, OK, handleResult,
+  BAD_REQUEST, NOT_FOUND, SERVER_ERROR, OK, handleResult, handleError,
 } = require('../constants');
-
-const handleError = (res, err) => {
-  res.status(SERVER_ERROR).send({ message: `Произошла ошибка: ${err.message}` });
-};
 
 // Получить данные о всех пользователях
 const getUsers = (req, res) => {
@@ -15,8 +11,16 @@ const getUsers = (req, res) => {
     .catch((err) => handleError(res, err));
 };
 
+// Получить данные о всех пользователях
+const getCurrentUser = (req, res) => {
+  User.findById(req.user._id)
+    .then((user) => handleResult(res, user))
+    .catch((err) => handleError(res, err));
+};
+
 // Получить данные о пользователе по userId
 const getUser = (req, res) => {
+  console.log(req.params.userId);
   User
     .findById(req.params.userId)
     .then((user) => {
@@ -27,7 +31,7 @@ const getUser = (req, res) => {
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        return res.status(BAD_REQUEST).send({ message: 'Получение пользователя с некорректным id.' });
+        return res.status(BAD_REQUEST).send({ message: 'Получение пользователя с некорректным id.--' });
       }
       handleError(res, err);
     });
@@ -76,4 +80,5 @@ module.exports = {
   getUser,
   updateUser,
   updateUserAvatar,
+  getCurrentUser,
 };
