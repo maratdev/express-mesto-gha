@@ -40,11 +40,13 @@ const createCard = (req, res) => {
 const deleteCards = (req, res) => {
   Card
     .findByIdAndDelete(req.params.cardId)
-    .then((result) => {
-      if (!result) {
+    .then((card) => {
+      if (!card) {
         return res.status(NOT_FOUND).send({ message: 'Карточка с указанным _id не найдена.' });
+      } if (card.owner.toString() !== req.user._id) {
+        return res.status(BAD_REQUEST).send({ message: 'Невозможно удалить карточку!' });
       }
-      handleResult(res, result);
+      handleResult(res, card);
     })
     .catch((err) => {
       if (err.name === 'CastError') {

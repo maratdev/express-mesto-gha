@@ -13,14 +13,6 @@ const { PORT = 3000 } = process.env;
 const DB = 'mongodb://localhost:27017/mestodb';
 const app = express();
 
-app.use((req, res, next) => {
-  req.user = {
-    _id: '64ac625a9e1f3809d05ae4b0',
-  };
-
-  next();
-});
-
 app.use(express.json());
 // Добавление данных
 app.post('/signup', auth, createUser);
