@@ -1,4 +1,6 @@
+const bcrypt = require('bcryptjs');
 const User = require('../models/user');
+
 const {
   BAD_REQUEST, NOT_FOUND, SERVER_ERROR, OK, CREATED,
 } = require('../constants');
@@ -38,6 +40,7 @@ const getUser = (req, res) => {
 
 // Создаёт пользователя
 const addUser = (req, res) => {
+  req.body.password = bcrypt.hashSync(req.body.password, 7);
   const newUser = new User(req.body);
   newUser
     .save()
