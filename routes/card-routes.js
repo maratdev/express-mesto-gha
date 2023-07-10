@@ -5,18 +5,18 @@ const {
 } = require('../controllers/card-controller');
 
 // Получить данные о всех карточках
-router.get('/cards', getCards);
+router.get('/', getCards);
 
 // Добавление данных
-router.post('/cards', createCard);
+router.post('/', createCard);
 
 // Удаление данных
-router.delete('/cards/:cardId', deleteCards);
+router.delete('/:cardId', deleteCards);
 
 // Добавить лайк
-router.put('/cards/:cardId/likes', likeCard);
+router.put('/:cardId/likes', likeCard);
 
 // Удалить лайк
-router.delete('/cards/:cardId/likes', dislikeCard);
+router.delete('/:cardId/likes', dislikeCard);
 
 module.exports = router;

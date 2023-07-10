@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const {
-  handleError, CREATED, BAD_REQUEST, OK,
+  handleError, CREATED, BAD_REQUEST,
 } = require('../constants');
 
 // Создаёт пользователя

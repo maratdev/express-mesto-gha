@@ -5,18 +5,18 @@ const {
 } = require('../controllers/users-controller');
 
 // Получить данные о всех пользователях
-router.get('/users', getUsers);
+router.get('/', getUsers);
 
 // Получения информации о пользователе
-router.get('/users/me', getCurrentUser);
+router.get('/me', getCurrentUser);
 
 // Получить данные о пользователе по id
-router.get('/users/:userId', getUser);
+router.get('/:userId', getUser);
 
 // Обновление данных
-router.patch('/users/me', updateUser);
+router.patch('/me', updateUser);
 
 // Обновление данных avatar
-router.patch('/users/me/avatar', updateUserAvatar);
+router.patch('/me/avatar', updateUserAvatar);
 
 module.exports = router;

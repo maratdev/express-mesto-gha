@@ -25,8 +25,9 @@ app.use(express.json());
 // Добавление данных
 app.post('/signup', auth, createUser);
 app.post('/signin', login);
-app.use(usersRoutes);
-app.use(cardsRoutes);
+
+app.use('/users', auth, usersRoutes);
+app.use('/cards', auth, cardsRoutes);
 
 app.use('/*', (req, res, next) => {
   res.status(NOT_FOUND).send({ message: 'Страница не найдена.' });
