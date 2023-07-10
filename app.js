@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const usersRoutes = require('./routes/users-routes');
 const cardsRoutes = require('./routes/card-routes');
+const { login } = require('./controllers/auth');
 const { NOT_FOUND } = require('./constants');
 
 const { PORT = 3000 } = process.env;
@@ -17,6 +18,8 @@ app.use((req, res, next) => {
 });
 
 app.use(express.json());
+// Добавление данных
+app.post('/signin', login);
 app.use(usersRoutes);
 app.use(cardsRoutes);
 

@@ -1,16 +1,11 @@
-const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 
 const {
-  BAD_REQUEST, NOT_FOUND, SERVER_ERROR, OK, CREATED,
+  BAD_REQUEST, NOT_FOUND, SERVER_ERROR, OK, handleResult,
 } = require('../constants');
 
 const handleError = (res, err) => {
   res.status(SERVER_ERROR).send({ message: `Произошла ошибка: ${err.message}` });
-};
-
-const handleResult = (res, data) => {
-  res.status(OK).json(data);
 };
 
 // Получить данные о всех пользователях
@@ -33,23 +28,6 @@ const getUser = (req, res) => {
     .catch((err) => {
       if (err.name === 'CastError') {
         return res.status(BAD_REQUEST).send({ message: 'Получение пользователя с некорректным id.' });
-      }
-      handleError(res, err);
-    });
-};
-
-// Создаёт пользователя
-const addUser = (req, res) => {
-  req.body.password = bcrypt.hashSync(req.body.password, 7);
-  const newUser = new User(req.body);
-  newUser
-    .save()
-    .then((result) => {
-      res.status(CREATED).json(result);
-    })
-    .catch((err) => {
-      if (err.name === 'ValidationError') {
-        return res.status(BAD_REQUEST).send({ message: 'Переданы некорректные данные' });
       }
       handleError(res, err);
     });
@@ -96,7 +74,6 @@ const updateUserAvatar = (req, res) => {
 module.exports = {
   getUsers,
   getUser,
-  addUser,
   updateUser,
   updateUserAvatar,
 };
