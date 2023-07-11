@@ -1,8 +1,8 @@
 const User = require('../models/user');
+const NotFoundError = require('../errors/NotFoundError');
+const BadRequestError = require('../errors/BadRequestError');
 
-const {
-  BAD_REQUEST, NOT_FOUND, SERVER_ERROR, OK, handleResult, handleError,
-} = require('../constants');
+const { OK, handleResult, handleError } = require('../constants');
 
 // Получить данные о всех пользователях
 const getUsers = (req, res) => {
@@ -11,7 +11,7 @@ const getUsers = (req, res) => {
     .catch((err) => handleError(res, err));
 };
 
-// Получить данные о всех пользователях
+// Получить данные о пользователе
 const getCurrentUser = (req, res) => {
   User.findById(req.user._id)
     .then((user) => handleResult(res, user))
@@ -19,59 +19,62 @@ const getCurrentUser = (req, res) => {
 };
 
 // Получить данные о пользователе по userId
-const getUser = (req, res) => {
+const getUser = (req, res, next) => {
   console.log(req.params.userId);
   User
     .findById(req.params.userId)
     .then((user) => {
       if (!user) {
-        return res.status(NOT_FOUND).send({ message: 'Пользователь с указанным _id не найдена.' });
+        throw new NotFoundError('Пользователь с указанным _id не найден.');
       }
       handleResult(res, user);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        return res.status(BAD_REQUEST).send({ message: 'Получение пользователя с некорректным id.--' });
+        next(new NotFoundError('Передан некорретный Id'));
+        return;
       }
-      handleError(res, err);
+      next(err);
     });
 };
 
 // Обновление данных user
-const updateUser = (req, res) => {
+const updateUser = (req, res, next) => {
   const { name, about } = req.body;
   User
     .findByIdAndUpdate(req.user._id, { name, about }, { new: true, runValidators: true })
     .then((result) => {
       if (!result) {
-        return res.status(NOT_FOUND).send({ message: 'Пользователь по указанному _id не найден.' });
+        throw new NotFoundError('Пользователь по указанному _id не найден.');
       }
       res.status(OK).json(result);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        return res.status(BAD_REQUEST).send({ message: 'Переданы некорректные данные при обновлении профиля.' });
+        next(new BadRequestError('Переданы некорректные данные при обновлении профиля.'));
+        return;
       }
-      handleError(res, err);
+      next(err);
     });
 };
 
 // Обновление данных user -> avatar
-const updateUserAvatar = (req, res) => {
+const updateUserAvatar = (req, res, next) => {
   const { avatar } = req.body;
   User
     .findByIdAndUpdate(req.user._id, { avatar }, { new: true, runValidators: true })
     .then((result) => {
       if (!result) {
-        return res.status(NOT_FOUND).send({ message: 'Пользователь по указанному _id не найден.' });
+        throw new NotFoundError('Пользователь по указанному _id не найден.');
       }
       res.status(OK).json(result);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        return res.status(BAD_REQUEST).send({ message: 'Переданы некорректные данные при обновлении аватара.' });
+        next(new BadRequestError('Переданы некорректные данные при обновлении аватара.'));
+        return;
       }
-      handleError(res, err);
+      next(err);
     });
 };
 

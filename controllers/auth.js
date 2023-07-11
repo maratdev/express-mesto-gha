@@ -7,6 +7,7 @@ const {
 
 // Создаёт пользователя
 const createUser = (req, res) => {
+  console.log(`куки ${req.cookies.jwt}`);
   req.body.password = bcrypt.hashSync(req.body.password, 7);
   const newUser = new User(req.body);
   newUser
@@ -23,17 +24,18 @@ const createUser = (req, res) => {
 };
 
 // Авторизация
-const login = (req, res) => {
+const login = (req, res, next) => {
   const { email, password } = req.body;
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      console.log(user._id.toString());
       const token = jwt.sign({ _id: user._id.toString() }, 'prpZUoYKk3YJ3nhemFHZ', { expiresIn: '7d' });
+      res.cookie('jwt', token, {
+        maxAge: 3600000,
+        httpOnly: true,
+      });
       res.send({ token });
     })
-    .catch((err) => {
-      handleError(res, err);
-    });
+    .catch(next);
 };
 
 module.exports = {

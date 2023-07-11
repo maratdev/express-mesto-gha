@@ -1,4 +1,6 @@
 const BAD_REQUEST = 400;
+const UNAUTHORIZED = 401;
+const FORBIDDEN = 403;
 const NOT_FOUND = 404;
 const SERVER_ERROR = 500;
 const OK = 200;
@@ -13,5 +15,13 @@ const handleResult = (res, data) => {
 };
 
 module.exports = {
-  BAD_REQUEST, NOT_FOUND, SERVER_ERROR, OK, CREATED, handleError, handleResult,
+  BAD_REQUEST,
+  NOT_FOUND,
+  SERVER_ERROR,
+  OK,
+  UNAUTHORIZED,
+  CREATED,
+  FORBIDDEN,
+  handleError,
+  handleResult,
 };
