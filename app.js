@@ -1,46 +1,22 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const { errors, celebrate, Joi } = require('celebrate');
+const { errors } = require('celebrate');
 const cookieParser = require('cookie-parser');
-const usersRoutes = require('./routes/users-routes');
-const cardsRoutes = require('./routes/card-routes');
-// Автризация + создание user
+const { SERVER_ERROR } = require('./constants');
+const router = require('./routes');
 const { login, createUser } = require('./controllers/auth');
-// Защищаем роуты
-const auth = require('./middlewares/auth');
+const { validationCreateUser, validationLogin } = require('./middlewares/validation');
 
-const { NOT_FOUND, SERVER_ERROR } = require('./constants');
-
-const { PORT = 3000 } = process.env;
-const DB = 'mongodb://localhost:27017/mestodb';
+const { PORT = 3000, DB = 'mongodb://localhost:27017/mestodb' } = process.env;
 const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
 // Добавление данных
-app.post('/signup', celebrate({
-  body: Joi.object().keys({
-    email: Joi.string().email().required(),
-    password: Joi.string().min(8).required(),
-    name: Joi.string().min(2).max(30),
-    about: Joi.string().min(2).max(30),
-    avatar: Joi.string().pattern(/^(https?):\/\/[^\s$.?#].[^\s]*$/),
-  }),
-}), auth, createUser);
-app.post('/signin', celebrate({
-  body: Joi.object().keys({
-    email: Joi.string().required().email(),
-    password: Joi.string().min(8).required(),
-  }),
-}), login);
+app.post('/signup', validationCreateUser, createUser);
+app.post('/signin', validationLogin, login);
 
-app.use('/users', auth, usersRoutes);
-app.use('/cards', auth, cardsRoutes);
-
-app.use('/*', (req, res, next) => {
-  res.status(NOT_FOUND).send({ message: 'Страница не найдена.' });
-  next();
-});
+app.use(router);
 
 mongoose
   .connect(DB, { useNewUrlParser: true, useUnifiedTopology: true })

@@ -20,7 +20,6 @@ const getCurrentUser = (req, res) => {
 
 // Получить данные о пользователе по userId
 const getUser = (req, res, next) => {
-  console.log(req.params.userId);
   User
     .findById(req.params.userId)
     .then((user) => {

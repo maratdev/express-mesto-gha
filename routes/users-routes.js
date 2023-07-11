@@ -1,6 +1,5 @@
 const router = require('express').Router();
-const { celebrate, Joi } = require('celebrate');
-
+const { validationUserId, validationUpdateUser, validationUpdateAvatar } = require('../middlewares/validation');
 const {
   getUsers, getUser, updateUser, updateUserAvatar, getCurrentUser,
 } = require('../controllers/users-controller');
@@ -12,16 +11,12 @@ router.get('/', getUsers);
 router.get('/me', getCurrentUser);
 
 // Получить данные о пользователе по id
-router.get('/:userId', celebrate({
-  params: Joi.object().keys({
-    id: Joi.string().hex().length(24).required(),
-  }),
-}), getUser);
+router.get('/:userId', validationUserId, getUser);
 
 // Обновление данных
-router.patch('/me', updateUser);
+router.patch('/me', validationUpdateUser, updateUser);
 
 // Обновление данных avatar
-router.patch('/me/avatar', updateUserAvatar);
+router.patch('/me/avatar', validationUpdateAvatar, updateUserAvatar);
 
 module.exports = router;

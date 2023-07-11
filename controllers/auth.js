@@ -1,25 +1,28 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-const {
-  handleError, CREATED, BAD_REQUEST,
-} = require('../constants');
+const BadRequestError = require('../errors/BadRequestError');
+const ConflictError = require('../errors/ConflictError');
+const { CREATED } = require('../constants');
 
 // Создаёт пользователя
-const createUser = (req, res) => {
-  console.log(`куки ${req.cookies.jwt}`);
+const createUser = (req, res, next) => {
   req.body.password = bcrypt.hashSync(req.body.password, 7);
   const newUser = new User(req.body);
   newUser
     .save()
     .then((result) => {
+      console.log(result);
       res.status(CREATED).json(result);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        return res.status(BAD_REQUEST).send({ message: 'Переданы некорректные данные' });
+        next(new BadRequestError('Переданы некорректные данные при создании пользователя.'));
+      } if (err.code === 11000) {
+        next(new ConflictError('Такой пользователь уже существует!'));
+        return;
       }
-      handleError(res, err);
+      next(err);
     });
 };
 
