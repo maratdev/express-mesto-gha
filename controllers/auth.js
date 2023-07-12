@@ -5,6 +5,8 @@ const BadRequestError = require('../errors/BadRequestError');
 const ConflictError = require('../errors/ConflictError');
 const { CREATED } = require('../errors/statusCode');
 
+const { NODE_ENV, JWT_SECRET } = process.env;
+
 // Создаёт пользователя
 const createUser = (req, res, next) => {
   req.body.password = bcrypt.hashSync(req.body.password, 7);
@@ -12,7 +14,6 @@ const createUser = (req, res, next) => {
   newUser
     .save()
     .then((result) => {
-      console.log(result);
       res.status(CREATED).json(result);
     })
     .catch((err) => {
@@ -31,7 +32,7 @@ const login = (req, res, next) => {
   const { email, password } = req.body;
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id.toString() }, 'prpZUoYKk3YJ3nhemFHZ', { expiresIn: '3600000' });
+      const token = jwt.sign({ _id: user._id.toString() }, NODE_ENV === 'production' ? JWT_SECRET : 'prpZUoYKk3YJ3nhemFHZ', { expiresIn: '7d' });
       res.cookie('jwt', token, {
         maxAge: 3600000,
         httpOnly: true,
