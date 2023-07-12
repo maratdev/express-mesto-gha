@@ -1,16 +1,25 @@
 require('dotenv').config();
+const helmet = require('helmet');
 const express = require('express');
+const rateLimit = require('express-rate-limit');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const cookieParser = require('cookie-parser');
 const router = require('./routes');
 const { SERVER_ERROR } = require('./errors/statusCode');
+const { TIME_LIMIT, MAX_LIMIT } = require('./util/constants');
 
 const { login, createUser } = require('./controllers/auth');
 const { validationCreateUser, validationLogin } = require('./middlewares/validation');
 
 const { PORT = 3000, DB = 'mongodb://localhost:27017/mestodb' } = process.env;
 const app = express();
+app.use(helmet());
+const limiter = rateLimit({
+  windowMs: TIME_LIMIT,
+  max: MAX_LIMIT,
+});
+app.use(limiter);
 
 app.use(express.json());
 app.use(cookieParser());

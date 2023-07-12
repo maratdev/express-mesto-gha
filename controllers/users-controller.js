@@ -1,7 +1,5 @@
 const User = require('../models/user');
-const NotFoundError = require('../errors/NotFoundError');
-const BadRequestError = require('../errors/BadRequestError');
-
+const { BadRequestError, NotFoundError } = require('../errors/errors');
 const { OK, handleResult, handleError } = require('../errors/statusCode');
 
 // Получить данные о всех пользователях
