@@ -2,7 +2,7 @@ const User = require('../models/user');
 const NotFoundError = require('../errors/NotFoundError');
 const BadRequestError = require('../errors/BadRequestError');
 
-const { OK, handleResult, handleError } = require('../constants');
+const { OK, handleResult, handleError } = require('../errors/statusCode');
 
 // Получить данные о всех пользователях
 const getUsers = (req, res) => {

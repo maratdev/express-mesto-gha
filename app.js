@@ -2,8 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const cookieParser = require('cookie-parser');
-const { SERVER_ERROR } = require('./constants');
 const router = require('./routes');
+const { SERVER_ERROR } = require('./errors/statusCode');
+
 const { login, createUser } = require('./controllers/auth');
 const { validationCreateUser, validationLogin } = require('./middlewares/validation');
 
@@ -13,10 +14,9 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 // Добавление данных
+app.use(router);
 app.post('/signup', validationCreateUser, createUser);
 app.post('/signin', validationLogin, login);
-
-app.use(router);
 
 mongoose
   .connect(DB, { useNewUrlParser: true, useUnifiedTopology: true })

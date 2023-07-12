@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const BadRequestError = require('../errors/BadRequestError');
 const ConflictError = require('../errors/ConflictError');
-const { CREATED } = require('../constants');
+const { CREATED } = require('../errors/statusCode');
 
 // Создаёт пользователя
 const createUser = (req, res, next) => {
@@ -18,11 +18,11 @@ const createUser = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new BadRequestError('Переданы некорректные данные при создании пользователя.'));
-      } if (err.code === 11000) {
+      } else if (err.code === 11000) {
         next(new ConflictError('Такой пользователь уже существует!'));
-        return;
+      } else {
+        next(err);
       }
-      next(err);
     });
 };
 
