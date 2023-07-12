@@ -1,7 +1,8 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-const { BadRequestError, ConflictError } = require('../errors/errors');
+const BadRequestError = require('../errors/BadRequestError');
+const ConflictError = require('../errors/ConflictError');
 const { CREATED } = require('../errors/statusCode');
 const { JWT_TOKEN_EXPIRES, COOKIE_MAX_AGE } = require('../util/constants');
 

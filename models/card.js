@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { IS_URL } = require('../util/constants');
 
 const cardSchema = new mongoose.Schema({
   name: {
@@ -11,7 +12,7 @@ const cardSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: (url) => /^(https?):\/\/[^\s$.?#].[^\s]*$/.test(url),
+      validator: (url) => IS_URL.test(url),
       message: (props) => `${props.value} - невалидная ссылка!`,
     },
   },

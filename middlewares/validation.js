@@ -1,4 +1,5 @@
 const { celebrate, Joi } = require('celebrate');
+const { IS_URL } = require('../util/constants');
 // ---------------------------------------- Users --------------------------- /
 // авторизация
 module.exports.validationCreateUser = celebrate({
@@ -7,7 +8,7 @@ module.exports.validationCreateUser = celebrate({
     password: Joi.string().min(8).required(),
     name: Joi.string().min(2).max(30),
     about: Joi.string().min(2).max(30),
-    avatar: Joi.string().pattern(/^(https?):\/\/[^\s$.?#].[^\s]*$/),
+    avatar: Joi.string().pattern(IS_URL),
   }),
 });
 // аутенфикация
@@ -33,7 +34,7 @@ module.exports.validationUpdateUser = celebrate({
 // Обновление данных avatar
 module.exports.validationUpdateAvatar = celebrate({
   body: Joi.object().keys({
-    avatar: Joi.string().pattern(/^(https?):\/\/[^\s$.?#].[^\s]*$/).required(),
+    avatar: Joi.string().pattern(IS_URL).required(),
   }),
 });
 
@@ -43,7 +44,7 @@ module.exports.validationUpdateAvatar = celebrate({
 module.exports.validationCreateCard = celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30).required(),
-    link: Joi.string().pattern(/^(https?):\/\/[^\s$.?#].[^\s]*$/).required(),
+    link: Joi.string().pattern(IS_URL).required(),
   }),
 });
 

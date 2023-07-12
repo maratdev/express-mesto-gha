@@ -1,12 +1,7 @@
 {
   "extends": "airbnb-base",
   "rules": {
-    "no-unused-vars": "warn",
     "no-console": "off",
-    "no-underscore-dangle":  ["error", { "allow": ["_id"] }],
-    "quotes": ["warn", "single"],
-    "prefer-const": "warn",
-    "consistent-return": "off",
-    "import/no-extraneous-dependencies": "off"
+    "no-underscore-dangle":  ["error", { "allow": ["_id"] }]
   }
 }

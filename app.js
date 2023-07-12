@@ -6,11 +6,10 @@ const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const cookieParser = require('cookie-parser');
 const router = require('./routes');
-const { SERVER_ERROR } = require('./errors/statusCode');
 const { TIME_LIMIT, MAX_LIMIT } = require('./util/constants');
-
 const { login, createUser } = require('./controllers/auth');
 const { validationCreateUser, validationLogin } = require('./middlewares/validation');
+const { serverLog } = require('./middlewares/serverlog');
 
 const { PORT = 3000, DB = 'mongodb://localhost:27017/mestodb' } = process.env;
 const app = express();
@@ -36,19 +35,7 @@ mongoose
 
 // здесь обрабатываем все ошибки
 app.use(errors());
-
-app.use((err, req, res, next) => {
-  const { statusCode = SERVER_ERROR, message } = err;
-
-  res.status(statusCode)
-    .send({
-      // проверяем статус и выставляем сообщение в зависимости от него
-      message: statusCode === SERVER_ERROR
-        ? 'На сервере произошла ошибка'
-        : message,
-    });
-  next();
-});
+app.use(serverLog);
 
 app.listen(PORT, (err) => {
   if (err) {
