@@ -31,7 +31,7 @@ const login = (req, res, next) => {
   const { email, password } = req.body;
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id.toString() }, 'prpZUoYKk3YJ3nhemFHZ', { expiresIn: '7d' });
+      const token = jwt.sign({ _id: user._id.toString() }, 'prpZUoYKk3YJ3nhemFHZ', { expiresIn: '3600000' });
       res.cookie('jwt', token, {
         maxAge: 3600000,
         httpOnly: true,

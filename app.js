@@ -14,9 +14,10 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 // Добавление данных
-app.use(router);
 app.post('/signup', validationCreateUser, createUser);
 app.post('/signin', validationLogin, login);
+
+app.use(router);
 
 mongoose
   .connect(DB, { useNewUrlParser: true, useUnifiedTopology: true })
