@@ -1,20 +1,20 @@
 const User = require('../models/user');
 const NotFoundError = require('../errors/NotFoundError');
 const BadRequestError = require('../errors/BadRequestError');
-const { OK, handleResult, handleError } = require('../errors/statusCode');
+const { OK, handleResult } = require('../errors/statusCode');
 
 // Получить данные о всех пользователях
-const getUsers = (req, res) => {
+const getUsers = (req, res, next) => {
   User.find()
     .then((users) => handleResult(res, users))
-    .catch((err) => handleError(res, err));
+    .catch(next);
 };
 
 // Получить данные о пользователе
-const getCurrentUser = (req, res) => {
+const getCurrentUser = (req, res, next) => {
   User.findById(req.user._id)
     .then((user) => handleResult(res, user))
-    .catch((err) => handleError(res, err));
+    .catch(next);
 };
 
 // Получить данные о пользователе по userId

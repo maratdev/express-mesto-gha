@@ -7,7 +7,7 @@ const { errors } = require('celebrate');
 const cookieParser = require('cookie-parser');
 const router = require('./routes');
 const { TIME_LIMIT, MAX_LIMIT } = require('./util/constants');
-const { login, createUser } = require('./controllers/auth');
+const { login, createUser, logout } = require('./controllers/auth');
 const { validationCreateUser, validationLogin } = require('./middlewares/validation');
 const { serverLog } = require('./middlewares/serverlog');
 
@@ -25,6 +25,7 @@ app.use(cookieParser());
 // Добавление данных
 app.post('/signup', validationCreateUser, createUser);
 app.post('/signin', validationLogin, login);
+app.get('/signout', logout);
 
 app.use(router);
 

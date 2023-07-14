@@ -43,7 +43,13 @@ const login = (req, res, next) => {
     .catch(next);
 };
 
+// Logout
+const logout = (req, res) => {
+  res.clearCookie('jwt').send({ message: 'Выход' });
+};
+
 module.exports = {
   login,
   createUser,
+  logout,
 };

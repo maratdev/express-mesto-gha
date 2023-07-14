@@ -1,15 +1,15 @@
 const Card = require('../models/card');
-const { CREATED, handleError, handleResult } = require('../errors/statusCode');
+const { CREATED, handleResult } = require('../errors/statusCode');
 const BadRequestError = require('../errors/BadRequestError');
 const NotFoundError = require('../errors/NotFoundError');
 const ForbiddenError = require('../errors/ForbiddenError');
 
 // Получить данные о всех карточках
-const getCards = (req, res) => {
+const getCards = (req, res, next) => {
   Card
     .find()
     .then((cards) => handleResult(res, cards))
-    .catch((err) => handleError(res, err));
+    .catch(next);
 };
 
 // Создаёт карточку
