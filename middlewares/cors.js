@@ -1,8 +1,15 @@
 const allowedCors = [
   'http://localhost:3000',
   'https://localhost:3000',
-  'api.nomoredomains.xyz',
-  'www.api.nomoredomains.xyz',
+  'http://api.nomoredomains.xyz',
+  'https://api.nomoredomains.xyz',
+  'http://www.api.nomoredomains.xyz',
+  'https://www.api.nomoredomains.xyz',
+
+  'http://voredev.nomoredomains.xyz',
+  'https://voredev.nomoredomains.xyz',
+  'http://www.voredev.nomoredomains.xyz',
+  'https://www.voredev.nomoredomains.xyz',
 ];
 
 const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';

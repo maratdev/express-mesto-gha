@@ -1,7 +1,7 @@
 [![Tests](../../actions/workflows/tests-13-sprint.yml/badge.svg)](../../actions/workflows/tests-13-sprint.yml) [![Tests](../../actions/workflows/tests-14-sprint.yml/badge.svg)](../../actions/workflows/tests-14-sprint.yml)
 
 # Проект Mesto бэкенд
- _***Проектная работа №14. Курс «Веб-разработчик» от Яндекс Практикум.***_
+ _***Проектная работа №15. Курс «Веб-разработчик» от Яндекс Практикум.***_
 
 ## Технологии:
   <a href="https://expressjs.com/ru/" target="_blank" rel="noreferrer"><img src="https://img.shields.io/badge/-Express-090909?style=for-the-badge&logo=Express" alt="Express" /></a>
