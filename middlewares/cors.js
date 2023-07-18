@@ -1,6 +1,5 @@
 const allowedCors = [
-  'http://localhost:3000',
-  'https://localhost:3000',
+  'localhost:3000',
   'http://api.nomoredomains.xyz',
   'https://api.nomoredomains.xyz',
   'http://www.api.nomoredomains.xyz',
