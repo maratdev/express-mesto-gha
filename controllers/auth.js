@@ -38,6 +38,7 @@ const login = (req, res, next) => {
         maxAge: COOKIE_MAX_AGE,
         httpOnly: true,
       });
+      res.send('Cookie Set');
       res.send({ token });
     })
     .catch(next);
