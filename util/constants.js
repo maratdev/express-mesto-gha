@@ -1,4 +1,4 @@
-const COOKIE_MAX_AGE = 3600000; // 7d
+const COOKIE_MAX_AGE = 3600000 * 24 * 7; // 7d
 const JWT_TOKEN_EXPIRES = '7d';
 // limiter
 const TIME_LIMIT = 15 * 60 * 1000; // за 15 минут
