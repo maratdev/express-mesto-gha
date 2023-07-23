@@ -1,8 +1,8 @@
-const COOKIE_MAX_AGE = 3600000 * 24 * 7; // 7d
+const COOKIE_MAX_AGE = 3600000; // 7d
 const JWT_TOKEN_EXPIRES = '7d';
 // limiter
 const TIME_LIMIT = 15 * 60 * 1000; // за 15 минут
-const MAX_LIMIT = 100; // можно совершить максимум 100 запросов с одного IP
+const MAX_LIMIT = 200; // можно совершить максимум 100 запросов с одного IP
 
 // RegExp
 const IS_URL = /^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s!"#$%&'()*+,:;<=>?@[\\\]`{|}~]*$/;

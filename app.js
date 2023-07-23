@@ -13,7 +13,7 @@ const { login, createUser, logout } = require('./controllers/auth');
 const { validationCreateUser, validationLogin } = require('./middlewares/validation');
 const { serverLog } = require('./middlewares/serverlog');
 
-const { PORT = 5000, DB = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
+const { PORT = 3000, DB = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
 const app = express();
 app.use(helmet());
 const limiter = rateLimit({
@@ -26,7 +26,14 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(requestLogger); // подключаем логгер запросов
+// Краш-тест сервера
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 // Добавление данных
+// app.use(readCookie);
 app.post('/signup', validationCreateUser, createUser);
 app.post('/signin', validationLogin, login);
 app.get('/signout', logout);
