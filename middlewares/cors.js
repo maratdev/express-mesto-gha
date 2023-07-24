@@ -1,33 +1,14 @@
-const allowedCors = [
-  'localhost:3000',
-  'https://localhost:3000',
-  'http://localhost:3000',
-  'http://api.nomoredomains.xyz',
-  'https://api.nomoredomains.xyz',
-  'http://www.api.nomoredomains.xyz',
-  'https://www.api.nomoredomains.xyz',
+require('dotenv').config();
 
-  'http://voredev.nomoredomains.xyz',
-  'https://voredev.nomoredomains.xyz',
-  'http://www.voredev.nomoredomains.xyz',
-  'https://www.voredev.nomoredomains.xyz',
-];
+const { NODE_ENV, ALLOWED_CORS_PRODUCTION } = process.env;
+const ALLOWED_CORS = NODE_ENV === 'production' ? ALLOWED_CORS_PRODUCTION : ['http://localhost:3001', 'http://localhost:3000'];
 
-const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE,PUT';
+const CORS_OPTIONS = {
+  credentials: true,
+  origin: ALLOWED_CORS,
+  exposedHeaders: ['set-cookie'],
+};
 
-module.exports = (req, res, next) => {
-  const { origin } = req.headers;
-  const { method } = req;
-  const requestHeaders = req.headers['access-control-request-headers'];
-  res.header('Access-Control-Allow-Credentials', true);
-  res.header('Access-Control-Expose-Headers', ['*', 'Authorization', ]);
-  if (allowedCors.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin);
-  }
-  if (method === 'OPTIONS') {
-    res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
-    res.header('Access-Control-Allow-Headers', requestHeaders);
-    return res.end();
-  }
-  return next();
+module.exports = {
+  CORS_OPTIONS,
 };
