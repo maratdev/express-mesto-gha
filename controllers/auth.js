@@ -6,7 +6,9 @@ const ConflictError = require('../errors/ConflictError');
 const { CREATED } = require('../errors/statusCode');
 const { JWT_TOKEN_EXPIRES, COOKIE_MAX_AGE } = require('../util/constants');
 
-const { NODE_ENV, JWT_SECRET, COOKIE_SAMESITE, COOKIE_SECURE } = process.env;
+const {
+  NODE_ENV, JWT_SECRET, COOKIE_SAMESITE, COOKIE_SECURE,
+} = process.env;
 
 // Создаёт пользователя
 const createUser = (req, res, next) => {
