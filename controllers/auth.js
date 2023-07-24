@@ -38,7 +38,7 @@ const login = (req, res, next) => {
         maxAge: COOKIE_MAX_AGE * 24 * 7,
         httpOnly: true,
         secure: true,
-        sameSite: 'strict',
+        sameSite: 'none',
       });
       res.send({ token });
     })
@@ -48,6 +48,7 @@ const login = (req, res, next) => {
 // Logout
 const logout = (req, res) => {
   res.clearCookie('jwt').send({ message: 'Выход' });
+  res.end();
 };
 
 module.exports = {
