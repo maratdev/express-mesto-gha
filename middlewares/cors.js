@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const { NODE_ENV, ALLOWED_CORS_PRODUCTION } = process.env;
-const ALLOWED_CORS = NODE_ENV === 'production' ? ALLOWED_CORS_PRODUCTION : ['http://localhost:3001', 'http://localhost:3000'];
+const ALLOWED_CORS = NODE_ENV === 'production' ? ALLOWED_CORS_PRODUCTION : ['https://localhost:300', 'http://localhost:3000', 'localhost:3000', 'https://voredev.nomoredomains.xyz', 'http://voredev.nomoredomains.xyz'];
 
 const CORS_OPTIONS = {
   credentials: true,
