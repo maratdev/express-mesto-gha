@@ -13,7 +13,12 @@ const {
 // Создаёт пользователя
 const createUser = (req, res, next) => {
   req.body.password = bcrypt.hashSync(req.body.password, 7);
-  const newUser = new User(req.body);
+  const {
+    name, about, avatar, email, password,
+  } = req.body;
+  const newUser = new User({
+    name, about, avatar, email, password,
+  });
   newUser
     .save()
     .then((result) => {

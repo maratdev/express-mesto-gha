@@ -5,7 +5,7 @@ const { IS_URL } = require('../util/constants');
 module.exports.validationCreateUser = celebrate({
   body: Joi.object().keys({
     email: Joi.string().email().required(),
-    password: Joi.string().min(8).required(),
+    password: Joi.string().required(),
     name: Joi.string().min(2).max(30),
     about: Joi.string().min(2).max(30),
     avatar: Joi.string().pattern(IS_URL),
@@ -15,7 +15,7 @@ module.exports.validationCreateUser = celebrate({
 module.exports.validationLogin = celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
-    password: Joi.string().min(8).required(),
+    password: Joi.string().required(),
   }),
 });
 // Получить данные о пользователе по id
