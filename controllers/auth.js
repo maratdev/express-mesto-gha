@@ -38,7 +38,6 @@ const login = (req, res, next) => {
         maxAge: COOKIE_MAX_AGE,
         httpOnly: true,
         sameSite: 'none',
-        secure: true,
       });
       res.send({ token });
     })
