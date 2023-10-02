@@ -14,7 +14,7 @@ const { login, createUser, logout } = require('./controllers/auth');
 const { validationCreateUser, validationLogin } = require('./middlewares/validation');
 const { serverLog } = require('./middlewares/serverlog');
 
-const { PORT = 3000, DB = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
+const { PORT = 3001, DB = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
 const app = express();
 app.use(helmet());
 const limiter = rateLimit({

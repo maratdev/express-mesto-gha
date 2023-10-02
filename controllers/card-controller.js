@@ -31,7 +31,7 @@ const createCard = (req, res, next) => {
 };
 
 // Удаление карточки
-const deleteCards = (req, res, next) => {
+const  deleteCards = (req, res, next) => {
   const { cardId } = req.params;
   return Card.findById(cardId)
     .then((card) => {
