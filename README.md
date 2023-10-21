@@ -21,7 +21,7 @@
 + Получение информации о текущем пользователе `GET: /users/me`
 + Получение списка всех карточек `GET: /cards`
 + Создание карточки `POST: /cards`
-+ Удаление карточки 'DELETE: /cards/cardID'
++ Удаление карточки `DELETE: /cards/cardID`
 + Постановка лайка `PUT: /cards/cardID/likes`
 + Снятие лайка `DELETE: /cards/cardID/likes`
 + Центральная обработка ошибок
