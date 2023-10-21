@@ -1,7 +1,6 @@
-[![Tests](../../actions/workflows/tests-13-sprint.yml/badge.svg)](../../actions/workflows/tests-13-sprint.yml) [![Tests](../../actions/workflows/tests-14-sprint.yml/badge.svg)](../../actions/workflows/tests-14-sprint.yml)
-
 # Проект Mesto бэкенд
- _***Проектная работа №15. Курс «Веб-разработчик» от Яндекс Практикум.***_
+ _***Backend часть сервиса, с помощью которого пользователь может делиться фото с другими.***_
+ [Live demo](https://voredev.nomoredomains.xyz/)
 
 ## Технологии:
   <a href="https://expressjs.com/ru/" target="_blank" rel="noreferrer"><img src="https://img.shields.io/badge/-Express-090909?style=for-the-badge&logo=Express" alt="Express" /></a>
@@ -13,21 +12,21 @@
 
 ### Функционал:
 
-+ Регистрация
-+ Авторизация
-+ Обновление данных пользователя
-+ Обновление аватара
-+ Получение списка пользователя
-+ Получение пользователя по ID
-+ Получение информации о текущем пользователе
-+ Получение списка карточек
-+ Создание карточки
-+ Удаление карточки
-+ Постановка лайка
-+ Снятие лайка
++ Регистрация  `POST: /signup`
++ Авторизация `POST: /signin`
++ Обновление данных пользователя `PATCH: /users/me`
++ Обновление аватара `PATCH: /users/me/avatar`
++ Получение списка всех пользователей `GET: /users`
++ Получение пользователя по ID `GET: /users/userID`
++ Получение информации о текущем пользователе `GET: /users/me`
++ Получение списка всех карточек `GET: /cards`
++ Создание карточки `POST: /cards`
++ Удаление карточки 'DELETE: /cards/cardID'
++ Постановка лайка `PUT: /cards/cardID/likes`
++ Снятие лайка `DELETE: /cards/cardID/likes`
 + Центральная обработка ошибок
 + Валидация входящих данных
-+ Защитита API авторизации
++ Защита API авторизацией
 ------
 ### О чём проект?
 
