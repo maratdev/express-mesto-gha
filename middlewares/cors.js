@@ -1,5 +1,5 @@
 const CORS_OPTIONS = {
-  credentials: true,
+  credentials: false,
   origin: 'http://localhost:3000',
   exposedHeaders: ['set-cookie'],
 };
