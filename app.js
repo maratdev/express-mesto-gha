@@ -6,7 +6,6 @@ const rateLimit = require('express-rate-limit');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const cookieParser = require('cookie-parser');
-const { CORS_OPTIONS } = require('./middlewares/cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const router = require('./routes');
 const { TIME_LIMIT, MAX_LIMIT } = require('./util/constants');
@@ -22,7 +21,7 @@ const limiter = rateLimit({
   max: MAX_LIMIT,
 });
 app.use(limiter);
-app.use(cors(CORS_OPTIONS));
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser(JWT_SECRET));
 
