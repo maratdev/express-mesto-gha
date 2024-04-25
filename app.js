@@ -26,6 +26,7 @@ app.use(cors({
   credentials: false,
   optionsSuccessStatus: 200,
   secure: false,
+  sameSite: 'Lax',
 }));
 app.use(express.json());
 app.use(cookieParser(JWT_SECRET));
