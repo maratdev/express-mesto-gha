@@ -7,7 +7,7 @@ const { CREATED } = require('../errors/statusCode');
 const { JWT_TOKEN_EXPIRES, COOKIE_MAX_AGE } = require('../util/constants');
 
 const {
-  NODE_ENV, JWT_SECRET, COOKIE_SECURE, COOKIE_SIGNED,
+  NODE_ENV, JWT_SECRET,
 } = process.env;
 
 // Создаёт пользователя
@@ -45,8 +45,8 @@ const login = (req, res, next) => {
         maxAge: COOKIE_MAX_AGE,
         httpOnly: true,
         sameSite: 'Lax',
-        secure: NODE_ENV === 'production' ? COOKIE_SECURE : false,
-        signed: NODE_ENV === 'production' ? COOKIE_SIGNED : false,
+        secure: false,
+        signed: false,
       });
       res.send({ token });
     })
