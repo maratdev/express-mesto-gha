@@ -22,7 +22,7 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 app.use(cors({
-  origin: 'http://localhost:3000/',
+  origin: 'http://localhost:3000',
   credentials: false,
   optionsSuccessStatus: 200,
   secure: false,
