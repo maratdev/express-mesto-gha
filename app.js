@@ -21,7 +21,10 @@ const limiter = rateLimit({
   max: MAX_LIMIT,
 });
 app.use(limiter);
-app.use(cors());
+app.use(cors({
+  origin: 'localhost:3000',
+  credentials: true,
+}));
 app.use(express.json());
 app.use(cookieParser(JWT_SECRET));
 
