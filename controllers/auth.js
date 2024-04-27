@@ -46,7 +46,6 @@ const login = (req, res, next) => {
         httpOnly: true,
         sameSite: 'Lax',
         secure: true,
-        signed: true,
       });
       res.send({ token });
     })
