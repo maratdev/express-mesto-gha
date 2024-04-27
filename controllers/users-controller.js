@@ -12,7 +12,6 @@ const getUsers = (req, res, next) => {
 
 // Получить данные о пользователе
 const getCurrentUser = (req, res, next) => {
-  console.log(req.user);
   User.findById(req.headers.cookie)
     .then((user) => handleResult(res, user))
     .catch(next);
