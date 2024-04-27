@@ -46,7 +46,6 @@ const login = (req, res, next) => {
         httpOnly: true,
         sameSite: 'none',
         secure: false,
-        signed: true,
       });
       res.send({ token });
     })
