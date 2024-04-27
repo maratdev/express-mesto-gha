@@ -12,7 +12,7 @@ const getUsers = (req, res, next) => {
 
 // Получить данные о пользователе
 const getCurrentUser = (req, res, next) => {
-  User.findById(req.user)
+  User.findById(req.user._id)
     .then((user) => handleResult(res, user))
     .catch(next);
 };

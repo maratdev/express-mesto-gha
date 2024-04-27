@@ -22,9 +22,8 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://127.0.0.1:3000', 'http://api.voredev.ru'],
+  origin: ['http://localhost:3000'],
   credentials: true,
-  exposedHeaders: ['set-cookie'],
 }));
 app.use(express.json());
 app.use(cookieParser(JWT_SECRET));
