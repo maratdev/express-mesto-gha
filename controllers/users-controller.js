@@ -12,7 +12,7 @@ const getUsers = (req, res, next) => {
 
 // Получить данные о пользователе
 const getCurrentUser = (req, res, next) => {
-  User.findById(req.headers.cookie)
+  User.findById(req.user)
     .then((user) => handleResult(res, user))
     .catch(next);
 };
