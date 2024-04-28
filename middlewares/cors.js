@@ -1,6 +1,6 @@
 const CORS_OPTIONS = {
-  credentials: false,
-  origin: 'http://localhost:3000',
+  origin: ['https://api.voredev.ru', 'http://api.voredev.ru', 'http://localhost:3000', 'https://maratdev.github.io'],
+  credentials: true,
   exposedHeaders: ['set-cookie'],
 };
 
