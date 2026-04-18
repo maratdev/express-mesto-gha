@@ -29,7 +29,7 @@ const { serverLog } = require('./middlewares/serverlog');
 const { CORS_OPTIONS } = require('./middlewares/cors');
 
 const {
-  PORT,
+  PORT = 3001,
   DB,
   JWT_SECRET,
 } = process.env;

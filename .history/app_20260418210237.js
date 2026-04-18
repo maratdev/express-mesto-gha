@@ -29,8 +29,8 @@ const { serverLog } = require('./middlewares/serverlog');
 const { CORS_OPTIONS } = require('./middlewares/cors');
 
 const {
-  PORT,
-  DB,
+  PORT = 3001,
+  DB = 'mongodb://127.0.0.1:27017/mestodb',
   JWT_SECRET,
 } = process.env;
 const app = express();

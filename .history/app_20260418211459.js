@@ -29,8 +29,8 @@ const { serverLog } = require('./middlewares/serverlog');
 const { CORS_OPTIONS } = require('./middlewares/cors');
 
 const {
-  PORT,
-  DB,
+  PORT = 3001,
+  DB = 'mongodb+srv://voredev:Dev123456@cluster0.ciddifg.mongodb.net/mestodb',
   JWT_SECRET,
 } = process.env;
 const app = express();

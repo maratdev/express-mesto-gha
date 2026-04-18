@@ -1,0 +1,26 @@
+# Общая сеть `mesto`: этот стек её создаёт. Во втором проекте (фронт) подключайте:
+#   networks:
+#     mesto:
+#       external: true
+#       name: mesto
+# Тогда контейнер mesto-frontend сможет обращаться к API по имени хоста: http://mesto-api:3000
+# С хост-машины API доступен на localhost:4202
+
+services:
+  mesto-api:
+    build: .
+    container_name: mesto-api
+    restart: unless-stopped
+    ports:
+      - "4202:3000"
+    environment:
+      PORT: "3000"
+      DB: ${DB}
+      JWT_SECRET: ${JWT_SECRET}
+    networks:
+      - mesto
+
+networks:
+  mesto:
+    name: mesto
+    driver: bridge
